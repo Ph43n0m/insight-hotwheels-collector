@@ -143,8 +143,8 @@ public class RealConnectionTest {
                         assertEquals(testPage.getName(), "Star Wars Character Cars");
 
                         assertEquals(testPage.getTableEntries()
-                                .size(), 209);
-                        assertEquals(((ArrayList) pickValues(tableValueData, "getImage")).size(), 88);
+                                .size(), 210);
+                        assertEquals(((ArrayList) pickValues(tableValueData, "getImage")).size(), 89);
 
                         checkEntry = testPage.getTableEntries()
                                 .stream()
@@ -159,7 +159,7 @@ public class RealConnectionTest {
                         break;
                     case "9492":
                         assertEquals(testPage.getToyNumber(), "56372");
-                        assertEquals(testPage.getImage(), "Dodge_Charger_2003.jpg");
+                        assertEquals(testPage.getImage(), "Daytona Mark Jones.jpg");
                         assertEquals(testPage.getDebutSeries(), "2003 First Editions");
                         assertEquals(testPage.getName(), "'69 Dodge Daytona ('Tooned)");
                         assertEquals(testPage.getDesigner(), "Mark Jones");
@@ -206,8 +206,7 @@ public class RealConnectionTest {
                     case "43255":
                         assertEquals(testPage.getToyNumber(), "BDC91");
                         assertEquals(testPage.getImage(), "Snoopu.JPG");
-                        assertEquals(testPage.getDebutSeries(),
-                                "Tooned Series#2014 HW City Tooned II mainline segment series");
+                        assertEquals(testPage.getDebutSeries(), "Tooned Series (2014)");
                         assertEquals(testPage.getName(), "Snoopy");
                         assertEquals(testPage.getDesigner(), "Manson Cheung");
                         assertEquals(testPage.getProducingYears(), "2014\n - Present");
@@ -277,8 +276,7 @@ public class RealConnectionTest {
                         assertNotNull(checkEntry);
 
                         assertEquals("Red Bird-2014 081.jpg", checkEntry.getImage());
-                        assertEquals("Tooned Series#2014 HW City Tooned I mainline segment series\n" + "\n" + "2/5",
-                                checkEntry.getSeries());
+                        assertEquals("Tooned Series (2014)", checkEntry.getSeries());
                         break;
                     case "8559":
                         assertEquals(testPage.getToyNumber(), "C2652");
@@ -468,7 +466,7 @@ public class RealConnectionTest {
 
                         assertEquals(testPage.getTableEntries()
                                 .size(), 12);
-                        assertEquals(((ArrayList) pickValues(tableValueData, "getImage")).size(), 9);
+                        assertEquals(((ArrayList) pickValues(tableValueData, "getImage")).size(), 10);
 
                         checkEntry = testPage.getTableEntries()
                                 .stream()
@@ -483,7 +481,7 @@ public class RealConnectionTest {
                         break;
                     case "13168":
                         assertEquals(testPage.getToyNumber(), "N4030");
-                        assertEquals(testPage.getImage(), "Custom42JeepCJ2A09FeRF_Thomas.jpg");
+                        assertEquals(testPage.getImage(), "Jeep_Phil.jpg");
                         assertEquals(testPage.getDebutSeries(), "2009 New Models");
                         assertEquals(testPage.getName(), "Custom '42 Jeep CJ-2A");
                         assertEquals(testPage.getDesigner(), "Phil Riehlman");
@@ -500,10 +498,8 @@ public class RealConnectionTest {
                         assertEquals(testPage.getBorn(), "1942");
 
                         assertEquals(testPage.getTableEntries()
-                                .size(), 4);
-                        assertEquals(((ArrayList) pickValues(tableValueData, "getImage")).size(),
-                                testPage.getTableEntries()
-                                        .size());
+                                .size(), 6);
+                        assertEquals(((ArrayList) pickValues(tableValueData, "getImage")).size(), 4);
 
                         checkEntry = testPage.getTableEntries()
                                 .stream()
@@ -514,7 +510,7 @@ public class RealConnectionTest {
                         assertNotNull(checkEntry);
 
                         assertEquals("Custom '42 Jeep CJ-2A Flying Customs.jpg", checkEntry.getImage());
-                        assertEquals("Flying_Customs_Series#Mix_2", checkEntry.getSeries());
+                        assertEquals("Flying Customs Series", checkEntry.getSeries());
                         break;
                     case "15369":
                         assertEquals(testPage.getToyNumber(), "R0918");
@@ -530,10 +526,8 @@ public class RealConnectionTest {
                         assertEquals(testPage.getAcceleration(), "6.2 seconds");
 
                         assertEquals(testPage.getTableEntries()
-                                .size(), 19);
-                        assertEquals(((ArrayList) pickValues(tableValueData, "getImage")).size(),
-                                testPage.getTableEntries()
-                                        .size());
+                                .size(), 23);
+                        assertEquals(((ArrayList) pickValues(tableValueData, "getImage")).size(), 19);
 
                         checkEntry = testPage.getTableEntries()
                                 .stream()
