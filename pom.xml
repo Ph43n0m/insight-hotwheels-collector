@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>collector.hotwheels.insight</groupId>
+    <artifactId>insight-hotwheels-collector</artifactId>
+    <version>0.0.1</version>
+
+    <organization>
+        <name>Mindville</name>
+        <url>https://github.com/ChSMindville/insight-hotwheels-collector</url>
+    </organization>
+
+    <name>Insight Hot Wheels Collector</name>
+    <description>This is the Hot Wheels Collector plugin for Insight. Read more on
+        https://github.com/ChSMindville/insight-hotwheels-collector/blob/master/README.md
+    </description>
+    <packaging>atlassian-plugin</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.12.1</version>
+        </dependency>
+-->
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-api</artifactId>
+            <version>${jira.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-core</artifactId>
+            <version>${jira.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugin</groupId>
+            <artifactId>atlassian-spring-scanner-annotation</artifactId>
+            <version>${atlassian.spring.scanner.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugin</groupId>
+            <artifactId>atlassian-spring-scanner-runtime</artifactId>
+            <version>${atlassian.spring.scanner.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- WIRED TEST RUNNER DEPENDENCIES -->
+
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
+            <version>${plugin.testrunner.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2-atlassian-1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.riadalabs.jira.plugins</groupId>
+            <artifactId>insight</artifactId>
+            <version>${insight.version}</version>
+            <classifier>import</classifier>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.riadalabs.jira.plugins</groupId>
+            <artifactId>insight</artifactId>
+            <version>${insight.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model</artifactId>
+            <version>3.6.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/insight-hotwheels-collector.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>**/insight-hotwheels-collector.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-jira-plugin</artifactId>
+                <version>${amps.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <productVersion>${jira.version}</productVersion>
+                    <productDataVersion>${jira.version}</productDataVersion>
+
+                    <extractDependencies>false</extractDependencies>
+                    <systemPropertyVariables>
+                        <atlassian.mail.senddisabled>false</atlassian.mail.senddisabled>
+                        <jira.downgrade.allowed>true</jira.downgrade.allowed>
+                    </systemPropertyVariables>
+
+                    <instructions>
+                        <Spring-Context>*;timeout:=60</Spring-Context>
+                        <Import-Package>
+                            com.riadalabs.jira.plugins.insight.services.model;version="${insight.version}",
+                            com.riadalabs.jira.plugins.insight.services.imports.common.external;version="${insight.version}",
+                            com.riadalabs.jira.plugins.insight.services.imports.common.external.model;version="${insight.version}",
+                            com.riadalabs.jira.plugins.insight.services.imports.common.external.model.external;version="${insight.version}",
+                            com.riadalabs.jira.plugins.insight.services.imports.common.external.model.external.baseversion;version="${insight.version}",
+                            com.riadalabs.jira.plugins.insight.services.imports.common.external.model.validation;version="${insight.version}",
+                            com.riadalabs.jira.plugins.insight.services.imports.common.external.insightfield;version="${insight.version}",
+                            com.riadalabs.jira.plugins.insight.services.imports.common.external.insightfield.checkbox;version="${insight.version}",
+                            com.riadalabs.jira.plugins.insight.services.imports.common.external.insightfield.picker;version="${insight.version}",
+                            com.riadalabs.jira.plugins.insight.services.imports.common.external.insightfield.select;version="${insight.version}",
+                            com.riadalabs.jira.plugins.insight.services.imports.common.external.insightfield.text;version="${insight.version}",
+                            com.riadalabs.jira.plugins.insight.services.imports.common.external.insightfield.textarea;version="${insight.version}",
+                            *;resolution:="optional"
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.atlassian.plugin</groupId>
+                <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
+                <version>${atlassian.spring.scanner.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>atlassian-spring-scanner</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scannedDependencies>
+                        <dependency>
+                            <groupId>com.atlassian.plugin</groupId>
+                            <artifactId>atlassian-spring-scanner-external-jar</artifactId>
+                        </dependency>
+                    </scannedDependencies>
+                    <verbose>false</verbose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <import.tools.version>1.14.0</import.tools.version>
+        <insight.version>5.7.0</insight.version>
+
+        <pdl.dir/>
+
+        <jira.version>7.6.1</jira.version>
+        <amps.version>6.3.21</amps.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
+        <atlassian.spring.scanner.version>1.2.13</atlassian.spring.scanner.version>
+        <!-- This key is used to keep the consistency between the key in atlassian-plugin.xml and the key to generate bundle. -->
+        <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
+    </properties>
+
+</project>

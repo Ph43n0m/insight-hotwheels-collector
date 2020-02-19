@@ -1,0 +1,17 @@
+/bin
+/target
+/bin
+/node
+/node_modules
+/.project
+/.settings
+/.checkstyle
+/.classpath
+/LICENSE
+/README
+/src/main/resources/includes/future-frontend/js/build
+/.idea
+insight.iml
+**/.DS_Store
+*.iml
+/gen

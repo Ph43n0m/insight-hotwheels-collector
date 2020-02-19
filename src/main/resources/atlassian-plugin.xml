@@ -1,0 +1,47 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <param name="plugin-icon">images/integration_logo_16.png</param>
+        <param name="plugin-logo">images/integration_logo_72.png</param>
+        <!--<param name="plugin-banner">images/insight-hotwheels-collector-banner.png</param>-->
+        <param name="atlassian-data-center-compatible">true</param>
+        <param name="vendor-icon">images/vendor_logo20x20.png</param>
+        <param name="vendor-logo">images/vendor_logo72x72.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="download" name="images/" location="/images"/>
+    <resource type="i18n" name="i18n" location="properties.i18n" />
+
+    <component key="propertyManager"
+               class="collector.hotwheels.insight.services.PropertyManagerImpl"
+               public="true">
+        <decription>Property Manager</decription>
+        <interface>collector.hotwheels.insight.services.PropertyManager
+        </interface>
+    </component>
+
+    <component key="jiraService"
+               class="collector.hotwheels.insight.services.JIRAServiceImpl"
+               public="true">
+        <decription>JIRA Service</decription>
+        <interface>collector.hotwheels.insight.services.JIRAService
+        </interface>
+    </component>
+
+    <component-import key="i18nResolver"
+                      interface="com.atlassian.sal.api.message.I18nResolver"/>
+
+    <insight-import key="insight-hotwheels-collector-import"
+                    name="Hot Wheels Import"
+                    class="collector.hotwheels.insight.imports.ImportModule">
+        <description>Hot Wheels import module used to import data from https://hotwheels.fandom.com/api/v1</description>
+        <icon>
+            /download/resources/collector.hotwheels.insight.insight-hotwheels-collector/images/import-hotwheels-collector.png
+        </icon>
+        <license-type>UNLICENSED</license-type>
+        <predefined-implementation>true</predefined-implementation>
+    </insight-import>
+</atlassian-plugin>
