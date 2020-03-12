@@ -5,9 +5,11 @@ import collector.hotwheels.insight.imports.manager.ContentManager;
 import collector.hotwheels.insight.imports.manager.StructureManager;
 import collector.hotwheels.insight.services.JIRAService;
 import collector.hotwheels.insight.services.PropertyManager;
+import collector.hotwheels.insight.util.CacheProvider;
 import collector.hotwheels.insight.util.I18FactoryFake;
 import com.atlassian.jira.license.JiraLicenseManager;
 import com.atlassian.jira.security.JiraAuthenticationContext;
+import com.atlassian.jira.user.ApplicationUser;
 import com.riadalabs.jira.plugins.insight.services.imports.common.external.AbstractInsightImportModule;
 import com.riadalabs.jira.plugins.insight.services.imports.common.external.DataLocator;
 import com.riadalabs.jira.plugins.insight.services.imports.common.external.ImportComponentException;
@@ -249,5 +251,16 @@ public class ImportModule extends AbstractInsightImportModule<ImportConfiguratio
                     .getProperty("rlabs.module.i18n.import.module.validation.Invalid.connection"));
             return ValidationResult.error(error);
         }
+    }
+
+    @Override
+    public ValidationResult postFunction(ImportConfiguration configuration,
+            int affectedObjectSchemaId,
+            ApplicationUser actor) {
+        CacheProvider.getInstance()
+                .Reset();
+        CacheProvider.getInstance()
+                .Clean();
+        return super.postFunction(configuration, affectedObjectSchemaId, actor);
     }
 }
