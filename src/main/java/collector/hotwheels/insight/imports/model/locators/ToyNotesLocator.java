@@ -19,7 +19,7 @@ public class ToyNotesLocator extends JavaCodeDataLocator<TableEntry> {
         List<String> ret = new ArrayList<>();
 
         if (obj != null && !isNullOrEmpty(obj.getNotes())) {
-            ret.add(String.join("</br>", obj.getNotes()
+            ret.add(String.join("<br />", obj.getNotes()
                     .split(System.lineSeparator())));
         }
         return ret;
