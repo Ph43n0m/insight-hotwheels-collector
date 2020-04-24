@@ -19,7 +19,7 @@ public class ModelDescriptionLocator extends JavaCodeDataLocator<PageData> {
         List<String> ret = new ArrayList<>();
 
         if (obj != null && !isNullOrEmpty(obj.getDescription())) {
-            ret.add(String.join("</br>", obj.getDescription()
+            ret.add(String.join("<br />", obj.getDescription()
                     .split(System.lineSeparator())));
         }
         return ret;

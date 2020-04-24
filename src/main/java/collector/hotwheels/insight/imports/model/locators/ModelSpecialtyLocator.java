@@ -19,7 +19,7 @@ public class ModelSpecialtyLocator extends JavaCodeDataLocator<PageData> {
         List<String> ret = new ArrayList<>();
 
         if (obj != null && !isNullOrEmpty(obj.getSpecialty())) {
-            ret.add(String.join("</br>", obj.getSpecialty()
+            ret.add(String.join("<br />", obj.getSpecialty()
                     .split(System.lineSeparator())));
         }
         return ret;
